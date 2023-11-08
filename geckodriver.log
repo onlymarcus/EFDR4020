@@ -1,0 +1,42 @@
+1696358659365	geckodriver	INFO	Listening on 127.0.0.1:58136
+1696358662448	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58137" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\onlym\\AppData\\Local\\Temp\\rust_mozprofileX8xtwc"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696358662746	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696358662824	Marionette	INFO	Listening on port 58144
+WebDriver BiDi listening on ws://127.0.0.1:58137
+Read port: 58144
+1696358663069	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:58137/devtools/browser/3b547e9a-3ca6-4dc6-9073-60b55c294da5
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://sso.acesso.gov.br."
+console.error: ({})
+JavaScript warning: https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=LBKja-oTGFN79DNZBn5Wk3iFjsJABur7qpP0P6GKWBjeLL8hqVn5S-iRhfVQ3FF2UVCVTzbxQPwNGVgOX1XB2AIeTuZD_6dw4hHDgr6CXzHbSewOoXFHzXy8Y-hNwMc-, line 330: Script terminated by timeout at:
+ns.SetTimeout@https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=LBKja-oTGFN79DNZBn5Wk3iFjsJABur7qpP0P6GKWBjeLL8hqVn5S-iRhfVQ3FF2UVCVTzbxQPwNGVgOX1XB2AIeTuZD_6dw4hHDgr6CXzHbSewOoXFHzXy8Y-hNwMc-:330:5
+ProcessDeactivate@https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=LBKja-oTGFN79DNZBn5Wk3iFjsJABur7qpP0P6GKWBjeLL8hqVn5S-iRhfVQ3FF2UVCVTzbxQPwNGVgOX1XB2AIeTuZD_6dw4hHDgr6CXzHbSewOoXFHzXy8Y-hNwMc-:2098:44
+OnBlur@https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=LBKja-oTGFN79DNZBn5Wk3iFjsJABur7qpP0P6GKWBjeLL8hqVn5S-iRhfVQ3FF2UVCVTzbxQPwNGVgOX1XB2AIeTuZD_6dw4hHDgr6CXzHbSewOoXFHzXy8Y-hNwMc-:2112:13
+ns.AddEventListener/<@https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=LBKja-oTGFN79DNZBn5Wk3iFjsJABur7qpP0P6GKWBjeLL8hqVn5S-iRhfVQ3FF2UVCVTzbxQPwNGVgOX1XB2AIeTuZD_6dw4hHDgr6CXzHbSewOoXFHzXy8Y-hNwMc-:261:29
+
+1696358715361	Marionette	INFO	Stopped listening on port 58144
+Dynamically enable window occlusion 1
+1696359863733	geckodriver	INFO	Listening on 127.0.0.1:58343
+1696359866778	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58344" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\onlym\\AppData\\Local\\Temp\\rust_mozprofileBI76VA"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696359867087	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696359867168	Marionette	INFO	Listening on port 58351
+WebDriver BiDi listening on ws://127.0.0.1:58344
+Read port: 58351
+1696359867377	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:58344/devtools/browser/706228c9-d5bf-4dd4-a0c1-765ac300e7d2
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cav.receita.fazenda.gov.br."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://sso.acesso.gov.br."
+console.error: ({})
+1696359964941	Marionette	INFO	Stopped listening on port 58351
+Dynamically enable window occlusion 1
