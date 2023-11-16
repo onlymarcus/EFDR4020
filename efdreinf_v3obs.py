@@ -55,7 +55,7 @@ for linha in range(79, numero_maximo_linhas + 79):  # Assumindo que os dados com
     r.click('incluirnovo.png')
     r.wait(1)
     r.click('datadofatogerador.png')
-    pyautogui.write('30092023')
+    pyautogui.write('31102023')
     pyautogui.press('tab')
     basedecalc = str(sheet[f'S{linha}'].value) # VALOR DA BASE DE CÁLCULO (MULTIPLICAR POR CEM NO EXCEL)
     pyautogui.write(basedecalc)

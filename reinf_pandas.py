@@ -15,25 +15,107 @@ df = pd.read_csv('R4000OUT23.csv', encoding='cp1252', delimiter=';')
 df.columns = ['CNPJ_EMIT', 'NOME_EMIT', 'CNPJ_REC', 'NOME_REC', 'NP', 'DH_DIA', 'DH_DOCORIG', 'OBSERVACAO',
               'PROCESSO', 'DH_VLR_DOCORIG', 'COMPROM', 'DH_VALOR', 'DARF_BC', 'DARF_VT', 'DARF_COD', 'DARF_DESC', 'REALIZADO']
 # Criar uma nova coluna com o código da receita
-df['CODIGO_REC'] = df['OBSERVACAO'].str.extract(r'\\(\d{5})')
-df['CODIGO_REC'].fillna('', inplace=True)
+df['NAT_REND'] = df['OBSERVACAO'].str.extract(r'\\(\d{5})')
+# Se não quiser que apareça NaN digita preenche com espaço em branco
+# df['NAT_REND'].fillna('', inplace=True)
 
 # Defina uma função para converter corretamente o formato da string para float
 
 
+# Defina uma função para converter corretamente o formato da string para float
 def convert_to_float(value):
     if isinstance(value, str):  # Checa se o valor é uma string
         value = value.replace('.', '').replace(',', '.')
     return float(value)
 
 
-# Aplica a função convert_to_float e depois formata para duas casas decimais
+# 55 Aplica a função convert_to_float e depois arredonda para duas casas decimais
 df['DARF_BC'] = df['DARF_BC'].apply(
-    convert_to_float).apply(lambda x: f"{x:.2f}")
+    convert_to_float).round(2).apply(lambda x: f"{x:.2f}")
 df['DARF_VT'] = df['DARF_VT'].apply(
-    convert_to_float).apply(lambda x: f"{x:.2f}")
+    convert_to_float).round(2).apply(lambda x: f"{x:.2f}")
 df['REALIZADO'] = df['REALIZADO'].apply(
-    convert_to_float).apply(lambda x: f"{x:.2f}")
+    convert_to_float).round(2).apply(lambda x: f"{x:.2f}")
+
+# Corrige o CNPJ errado da EBC
+df['CNPJ_EMIT'] = df['CNPJ_EMIT'].replace(115406, '09168704000142')
+df['CNPJ_REC'] = df['CNPJ_REC'].replace(115406, '09168704000142')
+
+# Agora ajusta todos os CNPJs para terem 14 dígitos
+df['CNPJ_EMIT'] = df['CNPJ_EMIT'].astype(str).str.zfill(14)
+df['CNPJ_REC'] = df['CNPJ_REC'].astype(str).str.zfill(14)
+
+df['CNPJ_EMIT'] = df['CNPJ_EMIT'].astype(str)
+df['DARF_COD'] = df['DARF_COD'].astype(str)
+
+
+def preenche_nat_rend(row):
+    if pd.isnull(row['NAT_REND']):  # Verifica se 'NAT_REND' está vazio
+        if row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 8739:
+            return '17013'
+        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 6147:
+            return '17009'
+        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 6190:
+            return '17099'
+        elif row['CNPJ_EMIT'] == '37979739000105':
+            return '17023'
+        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == 6147:
+            return '17001'
+        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == 6190:
+            return '17099'
+        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == 6147:
+            return '17009'
+        elif row['CNPJ_EMIT'] == '07774050000175' and row['DARF_COD'] == 6190:
+            return '17031'
+        elif row['CNPJ_EMIT'] == '41116138000138' and row['DARF_COD'] == 6147:
+            return '17099'
+        elif row['CNPJ_EMIT'] == '12467682000126' and row['DARF_COD'] == 6147:
+            return '17009'
+        elif row['CNPJ_EMIT'] == '09168704000142' and row['DARF_COD'] == 6190:
+            return '17099'
+        elif row['CNPJ_EMIT'] == '09422042000195' and row['DARF_COD'] == 6190:
+            return '17033'
+        elif row['CNPJ_EMIT'] == '41106188000304' and row['DARF_COD'] == 6147:
+            return '17001'
+        elif row['CNPJ_EMIT'] == '06088039000199' and row['DARF_COD'] == 6147:
+            return '17001'
+        elif row['CNPJ_EMIT'] == '17086031000100' and row['DARF_COD'] == 6190:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '40432544000147' and row['DARF_COD'] == 6190:
+            return '17029'
+        elif row['CNPJ_EMIT'] == '11533627000124' and row['DARF_COD'] == 6147:
+            return '17003'
+        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == 6147:
+            return '17001'
+        elif row['CNPJ_EMIT'] == '00449936000102' and row['DARF_COD'] == 6147:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '18301321000191' and row['DARF_COD'] == 6190:
+            return '17033'
+        elif row['CNPJ_EMIT'] == '09445502000109' and row['DARF_COD'] == 6147:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '21896864000103' and row['DARF_COD'] == 6147:
+            return '17009'
+        elif row['CNPJ_EMIT'] == '10835932000108' and row['DARF_COD'] == 6147:
+            return '17002'
+        elif row['CNPJ_EMIT'] == '01781573000162' and row['DARF_COD'] == 6190:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '04427309000113' and row['DARF_COD'] == 6190:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '04900474000140' and row['DARF_COD'] == 6190:
+            return '17032'
+        elif row['CNPJ_EMIT'] == '09769035000164' and row['DARF_COD'] == 6190:
+            return '17028'
+        elif row['CNPJ_EMIT'] == '24396327000192' and row['DARF_COD'] == 6147:
+            return '17099'
+
+        # Você pode adicionar mais condições aqui conforme necessário
+    # Retorna o valor atual se não estiver vazio ou se nenhuma condição for correspondida
+    return row['NAT_REND']
+
+
+# Aplica a função a cada linha do DataFrame
+df['NAT_REND'] = df.apply(preenche_nat_rend, axis=1)
+
 
 time.sleep(30)
 
@@ -56,11 +138,11 @@ for index, row in df.iterrows():
     pyautogui.press('tab')
     pyautogui.write('24134488000108', interval=0.1)
     pyautogui.press('tab')
-    texto = str(row['CNPJ_REC'])  # CNPJ do recolhedor converter em string
-    pyautogui.write(texto, interval=0.1)
+    cnpj_rec = str(row['CNPJ_REC'])  # CNPJ do recolhedor converter em string
+    pyautogui.write(cnpj_rec, interval=0.1)
     pyautogui.press('tab')
-    texto = str(index + 1)  # converter em string
-    pyautogui.write(texto, interval=0.1)
+    ordem = str(index + 1)  # converter em string
+    pyautogui.write(ordem, interval=0.1)
     r.click('continuar.png')
     # segunda página, natureza do rendimento pago, clicar em incluir nova
     r.wait(1)
@@ -70,8 +152,8 @@ for index, row in df.iterrows():
     pyautogui.press('down', presses=7)
     pyautogui.press('enter')
     pyautogui.press('tab')
-    texto = str(row['R'])  # COLUNA R COM A NATUREZA DO RENDIMENTO
-    pyautogui.typewrite(texto, interval=0.1)
+    nat_rend = str(row['NAT_REND'])  # COLUNA COM A NATUREZA DO RENDIMENTO
+    pyautogui.typewrite(nat_rend, interval=0.1)
     pyautogui.press(['tab', 'tab', 'enter'])
     # Terceira página: Detalhamento dos pagamentos ou créditos, clicar incluir novo
     r.click('incluirnovo.png')
@@ -79,18 +161,18 @@ for index, row in df.iterrows():
     r.click('datadofatogerador.png')
     pyautogui.write('31102023')
     pyautogui.press('tab')
-    basedecalc = row['basedecalc']  # VALOR DA BASE DE CÁLCULO
-    pyautogui.write(basedecalc)
+    darf_bc = row['DARF_BC']  # VALOR DA BASE DE CÁLCULO
+    pyautogui.write(darf_bc)
     pyautogui.press('tab')
     pyautogui.write('n')
     pyautogui.press(['tab', 'tab', 'tab'])
-    obser = str(row['I'])  # VALOR DA OBSERVAÇÃO
+    obser = str(row['OBSERVACAO'])  # VALOR DA OBSERVAÇÃO
     pyautogui.write(obser)
     pyautogui.press(['tab', 'tab', 'tab'])
-    pyautogui.write(basedecalc)
+    pyautogui.write(darf_bc)
     pyautogui.press('tab')
-    vlrdarf = row['vlrdarf']  # VALOR DO DARF
-    pyautogui.write(vlrdarf)
+    darf_vt = row['DARF_VT']  # VALOR DO DARF
+    pyautogui.write(darf_vt)
     pyautogui.press(['tab', 'enter'])
     # Pagina de finalização - salvar rascunho
     r.click(1470, 776)
