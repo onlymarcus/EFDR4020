@@ -116,6 +116,10 @@ def preenche_nat_rend(row):
 # Aplica a função a cada linha do DataFrame
 df['NAT_REND'] = df.apply(preenche_nat_rend, axis=1)
 
+# DataFrame onde a coluna 'NAT_REND' está vazia (é NaN)
+df_vazio = df[df['NAT_REND'].isna()]
+# DataFrame onde a coluna 'NAT_REND' está preenchida:
+df = df.dropna(subset=['NAT_REND'])
 
 time.sleep(30)
 
