@@ -139,7 +139,7 @@ df.to_excel('preenchido.xlsx', index=False)
 time.sleep(30)
 
 # Itera pelas linhas do DataFrame
-for index, row in df_agrupado.iloc[49:].iterrows():
+for index, row in df_agrupado.iloc[53:].iterrows():
     # Preenche os campos da primeira página
     # Use pyautogui para mover o mouse e clicar no menu suspenso para iniciar o r4000
     r.click(1634, 939)
