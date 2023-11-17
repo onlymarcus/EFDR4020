@@ -22,7 +22,6 @@ df['NAT_REND'] = df['OBSERVACAO'].str.extract(r'\\(\d{5})')
 # Defina uma função para converter corretamente o formato da string para float
 
 
-# Defina uma função para converter corretamente o formato da string para float
 def convert_to_float(value):
     if isinstance(value, str):  # Checa se o valor é uma string
         value = value.replace('.', '').replace(',', '.')
@@ -44,7 +43,7 @@ df['CNPJ_REC'] = df['CNPJ_REC'].replace(115406, '09168704000142')
 # Agora ajusta todos os CNPJs para terem 14 dígitos
 df['CNPJ_EMIT'] = df['CNPJ_EMIT'].astype(str).str.zfill(14)
 df['CNPJ_REC'] = df['CNPJ_REC'].astype(str).str.zfill(14)
-
+# Converte DARF COD E CNPJ EMIT para string
 df['CNPJ_EMIT'] = df['CNPJ_EMIT'].astype(str)
 df['DARF_COD'] = df['DARF_COD'].astype(str)
 
@@ -116,8 +115,23 @@ def preenche_nat_rend(row):
 # Aplica a função a cada linha do DataFrame
 df['NAT_REND'] = df.apply(preenche_nat_rend, axis=1)
 
+# Converte DARF_BC e DARF_VT para numérico (float)
+df['DARF_BC'] = pd.to_numeric(df['DARF_BC'], errors='coerce')
+df['DARF_VT'] = pd.to_numeric(df['DARF_VT'], errors='coerce')
+
+# Agrupar por CNPJ_REC, DARF_COD, NAT_REND e somar DARF_BC e DARF_VT
+df_agrupado = df.groupby(['CNPJ_REC', 'DARF_COD', 'NAT_REND']).agg(
+    {'DARF_BC': 'sum', 'DARF_VT': 'sum'}).reset_index()
+# 55 Aplica a função convert_to_float e depois arredonda para duas casas decimais
+df_agrupado['DARF_BC'] = df_agrupado['DARF_BC'].apply(
+    convert_to_float).round(2).apply(lambda x: f"{x:.2f}")
+df_agrupado['DARF_VT'] = df_agrupado['DARF_VT'].apply(
+    convert_to_float).round(2).apply(lambda x: f"{x:.2f}")
+# salva o agrupado em excel
+df_agrupado.to_excel('agrupado.xlsx', index=False)
 # DataFrame onde a coluna 'NAT_REND' está vazia (é NaN)
 df_vazio = df[df['NAT_REND'].isna()]
+df_vazio.to_excel('preenchido.xlsx', index=False)
 # DataFrame onde a coluna 'NAT_REND' está preenchida:
 df = df.dropna(subset=['NAT_REND'])
 # Imprime no excel
@@ -125,7 +139,7 @@ df.to_excel('preenchido.xlsx', index=False)
 time.sleep(30)
 
 # Itera pelas linhas do DataFrame
-for index, row in df.iterrows():
+for index, row in df_agrupado.iterrows():
     # Preenche os campos da primeira página
     # Use pyautogui para mover o mouse e clicar no menu suspenso para iniciar o r4000
     r.click(1634, 939)
@@ -134,7 +148,6 @@ for index, row in df.iterrows():
     r.wait(1)
     r.click('segundoclick.png')
     r.click('casinha.png')
-    time.sleep(2)
     r.wait()
 
     # primeira página com informações gerais
@@ -174,7 +187,7 @@ for index, row in df.iterrows():
     pyautogui.press('tab')
     pyautogui.write('n')
     pyautogui.press(['tab', 'tab', 'tab'])
-    obser = str(row['OBSERVACAO'])  # VALOR DA OBSERVAÇÃO
+    obser = ' '  # VALOR DA OBSERVAÇÃO
     pyautogui.write(obser)
     pyautogui.press(['tab', 'tab', 'tab'])
     pyautogui.write(darf_bc, interval=0.1)
