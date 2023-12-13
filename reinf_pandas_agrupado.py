@@ -9,7 +9,7 @@ r.init(visual_automation=True)
 r.url('https://cav.receita.fazenda.gov.br/autenticacao/')
 
 # Carrega o arquivo CSV
-df = pd.read_csv('R4000OUT23.csv', encoding='cp1252', delimiter=';')
+df = pd.read_csv('efdr4000nov23.csv', encoding='cp1252', delimiter=';')
 
 # Renomear as colunas
 df.columns = ['CNPJ_EMIT', 'NOME_EMIT', 'CNPJ_REC', 'NOME_REC', 'NP', 'DH_DIA', 'DH_DOCORIG', 'OBSERVACAO',
@@ -50,63 +50,84 @@ df['DARF_COD'] = df['DARF_COD'].astype(str)
 
 def preenche_nat_rend(row):
     if pd.isnull(row['NAT_REND']):  # Verifica se 'NAT_REND' está vazio
-        if row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 8739:
+        if row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == '8739':
             return '17013'
-        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == '6147':
             return '17009'
-        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '05340639000130' and row['DARF_COD'] == '6190':
             return '17099'
         elif row['CNPJ_EMIT'] == '37979739000105':
             return '17023'
-        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == '6147':
             return '17001'
-        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == '6190':
             return '17099'
-        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '16951665000110' and row['DARF_COD'] == '6147':
             return '17009'
-        elif row['CNPJ_EMIT'] == '07774050000175' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '07774050000175' and row['DARF_COD'] == '6190':
             return '17031'
-        elif row['CNPJ_EMIT'] == '41116138000138' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '41116138000138' and row['DARF_COD'] == '6147':
             return '17099'
-        elif row['CNPJ_EMIT'] == '12467682000126' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '12467682000126' and row['DARF_COD'] == '6147':
             return '17009'
-        elif row['CNPJ_EMIT'] == '09168704000142' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '09168704000142' and row['DARF_COD'] == '6190':
             return '17099'
-        elif row['CNPJ_EMIT'] == '09422042000195' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '09422042000195' and row['DARF_COD'] == '6190':
             return '17033'
-        elif row['CNPJ_EMIT'] == '41106188000304' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '41106188000304' and row['DARF_COD'] == '6147':
             return '17001'
-        elif row['CNPJ_EMIT'] == '06088039000199' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '06088039000199' and row['DARF_COD'] == '6147':
             return '17001'
-        elif row['CNPJ_EMIT'] == '17086031000100' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '17086031000100' and row['DARF_COD'] == '6190':
             return '17032'
-        elif row['CNPJ_EMIT'] == '40432544000147' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '40432544000147' and row['DARF_COD'] == '6190':
             return '17029'
-        elif row['CNPJ_EMIT'] == '11533627000124' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '11533627000124' and row['DARF_COD'] == '6147':
             return '17003'
-        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '27729308000129' and row['DARF_COD'] == '6147':
             return '17001'
-        elif row['CNPJ_EMIT'] == '00449936000102' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '00449936000102' and row['DARF_COD'] == '6147':
             return '17032'
-        elif row['CNPJ_EMIT'] == '18301321000191' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '18301321000191' and row['DARF_COD'] == '6190':
             return '17033'
-        elif row['CNPJ_EMIT'] == '09445502000109' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '09445502000109' and row['DARF_COD'] == '6147':
             return '17032'
-        elif row['CNPJ_EMIT'] == '21896864000103' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '21896864000103' and row['DARF_COD'] == '6147':
             return '17009'
-        elif row['CNPJ_EMIT'] == '10835932000108' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '10835932000108' and row['DARF_COD'] == '6147':
             return '17002'
-        elif row['CNPJ_EMIT'] == '01781573000162' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '01781573000162' and row['DARF_COD'] == '6190':
             return '17032'
-        elif row['CNPJ_EMIT'] == '04427309000113' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '04427309000113' and row['DARF_COD'] == '6190':
             return '17032'
-        elif row['CNPJ_EMIT'] == '04900474000140' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '04900474000140' and row['DARF_COD'] == '6190':
             return '17032'
-        elif row['CNPJ_EMIT'] == '09769035000164' and row['DARF_COD'] == 6190:
+        elif row['CNPJ_EMIT'] == '09769035000164' and row['DARF_COD'] == '6190':
             return '17028'
-        elif row['CNPJ_EMIT'] == '24396327000192' and row['DARF_COD'] == 6147:
+        elif row['CNPJ_EMIT'] == '24396327000192' and row['DARF_COD'] == '6147':
             return '17099'
-
+        elif row['CNPJ_EMIT'] == '13653008000107' and row['DARF_COD'] == '6147':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '12035234000153' and row['DARF_COD'] == '6190':
+            return '17001'
+        elif row['CNPJ_EMIT'] == '34028316002157' and row['DARF_COD'] == '6190':
+            return '17030'
+        elif row['CNPJ_EMIT'] == '07999951000165' and row['DARF_COD'] == '6147':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '02604236000162' and row['DARF_COD'] == '6147':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '12805036000121' and row['DARF_COD'] == '6147':
+            return '17003'
+        elif row['CNPJ_EMIT'] == '31731853000127' and row['DARF_COD'] == '6147':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '65149197000251' and row['DARF_COD'] == '6147':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '28820255000110' and row['DARF_COD'] == '8767':
+            return '17008'
+        elif row['CNPJ_EMIT'] == '07674744000130' and row['DARF_COD'] == '6190':
+            return '17009'
+        elif row['CNPJ_EMIT'] == '13938438000167' and row['DARF_COD'] == '6147':
+            return '17099'
         # Você pode adicionar mais condições aqui conforme necessário
     # Retorna o valor atual se não estiver vazio ou se nenhuma condição for correspondida
     return row['NAT_REND']
