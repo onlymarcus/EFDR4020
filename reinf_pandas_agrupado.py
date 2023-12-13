@@ -160,7 +160,7 @@ df.to_excel('preenchido.xlsx', index=False)
 time.sleep(30)
 
 # Itera pelas linhas do DataFrame
-for index, row in df_agrupado.iloc[53:].iterrows():
+for index, row in df_agrupado.iloc[9:].iterrows():
     # Preenche os campos da primeira página
     # Use pyautogui para mover o mouse e clicar no menu suspenso para iniciar o r4000
     r.click(1634, 939)
@@ -173,7 +173,7 @@ for index, row in df_agrupado.iloc[53:].iterrows():
 
     # primeira página com informações gerais
     r.click('periododeapuracao.png')
-    pyautogui.write('102023')
+    pyautogui.write('112023')
     pyautogui.press('tab')
     pyautogui.write('24134488000108', interval=0.1)
     pyautogui.press('tab')
@@ -201,7 +201,7 @@ for index, row in df_agrupado.iloc[53:].iterrows():
     r.click('incluirnovo.png')
     r.wait(1)
     r.click('datadofatogerador.png')
-    pyautogui.write('31102023')
+    pyautogui.write('30112023')
     pyautogui.press('tab')
     darf_bc = str(row['DARF_BC'])  # VALOR DA BASE DE CÁLCULO
     pyautogui.write(darf_bc, interval=0.1)
@@ -219,6 +219,14 @@ for index, row in df_agrupado.iloc[53:].iterrows():
     # Pagina de finalização - salvar rascunho
     r.click(1470, 776)
     pyautogui.press('end')
-    r.click('salvarrascunho.png')
+    r.click('concluirenviar.png')
+    r.wait(2)
+    r.click('assinatura.png')
+    r.click('selecionar.png')
+    r.wait(5)
+    # r.click('senha.png')
+    # pyautogui.write('1234', interval=0.05)
+    # r.click('oksenha.png')
+
 
 r.close()  # Fecha a sessão RPA
